@@ -1,11 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
-using Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<BookService>();
-builder.Services.AddScoped<CategoryService>();
 // Add services to the container.
 
 // Add services to the container.

@@ -10,16 +10,19 @@ namespace Persistence.Data
 {
     public class DataContext : DbContext
     {
-        public DataContext(DbContextOptions<DataContext> options) : base(options)
-        {
-
-        }
+        public DataContext(DbContextOptions<DataContext> options) : base(options){}
 
 
+        DbSet<Employee> Employees { get; set; }
+        DbSet<Department> Departments { get; set; }
+        DbSet<Dependent> Dependents { get; set; }
+        DbSet<Job> Jobs { get; set; }
+        DbSet<Region> Regions { get; set; }
+        DbSet<Countrie> Countries { get; set; }
+        DbSet<Location> Locations { get; set; }
 
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Category> Categories { get; set; }
        
+
 
     }
 }
