@@ -35,4 +35,15 @@ namespace Domain.Entities
         public int CountrieId { get; set; }
         public Countrie? Countrie { get; set; }
     }
+
+    public class LocationDTO
+    {
+       
+        public int Id { get; set; }
+        public string? StreetAddress { get; set; }
+        public string? PostalCode { get; set; }
+        public string? City { get; set; }
+        public string? StateProvince { get; set; }
+        public int CountrieId { get; set; }
+    }
 }

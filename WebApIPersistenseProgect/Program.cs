@@ -1,11 +1,16 @@
 using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
-
+using Services.ClassServices;
+using Services.InterfaceService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+builder.Services.AddScoped<IDepartmentService,DepartmentService>();
+builder.Services.AddScoped<IRegionService,RegionService>();
+builder.Services.AddScoped<ICountrieService,CountrieService>();
+builder.Services.AddScoped<ILocationService,LocationService>();
+builder.Services.AddScoped<IJobService,JobService>();
 // Add services to the container.
 // get connection string from appsettings.json
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
