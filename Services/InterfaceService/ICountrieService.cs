@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Services.InterfaceService
 {
     public  interface ICountrieService
     {
-        List<CountrieDTO> GetCountries();
-        List<CountrieDTO> GetCountrie(int id);
-        int Insert(CountrieDTO countrie);
-        int Update(CountrieDTO countrie);
+        List<CountrieEntrieDTO> GetCountries();
+        List<CountrieEntrieDTO> GetCountrie(int id);
+        int Insert(CountrieEntrieDTO countrie);
+        int Update(CountrieEntrieDTO countrie);
         int Delete(int id);
 
     }

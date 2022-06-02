@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -25,27 +26,28 @@ namespace Services.ClassServices
 
         
 
-        public List<DepartmentDTO> GetDepartments()
+        public List<DepartmentEntrieDTO> GetDepartments()
         {
             var list = (
                         from d in dataContext.Departments
-                        select new DepartmentDTO()
+                        select new DepartmentEntrieDTO()
                         {
-                            Name=d.Name,
-                            LocationId=d.LocationId,
+                            Id = d.Id,
+                            Name = d.Name,
+                            LocationId = d.LocationId
                         }
                 
                 ).ToList();
             return list;
         }
 
-        public List<DepartmentEL> GetDepartmentsAndEmployees()
+        public List<DepartmentDTO> GetDepartmentsAndEmployees()
         {
             var list = (
                         from d in dataContext.Departments
                         join e in dataContext.Employees on d.Id equals e.DepartmentId
                         join l in dataContext.Locations on d.LocationId equals l.Id
-                        select new DepartmentEL()
+                        select new DepartmentDTO()
                         {
                             EmployeeId = e.Id,
                             FullName = string.Concat(e.FirstName, " ", e.LastName),
@@ -68,12 +70,12 @@ namespace Services.ClassServices
             return list;
         }
         
-        public List<DepartmentDTO> GetDepartment(int id)
+        public List<DepartmentEntrieDTO> GetDepartments(int id)
         {
            
             var deparment = (from d in dataContext.Departments
                              where d.Id == id
-                             select new DepartmentDTO()
+                             select new DepartmentEntrieDTO()
                              {
                                  Id = d.Id,
                                  Name = d.Name,
@@ -84,19 +86,22 @@ namespace Services.ClassServices
             return  deparment;
         }
 
-        public int Insert(DepartmentDTO departmentDTO)
+       
+
+
+        public int Insert(DepartmentEntrieDTO department)
         {
-            var newDepartment = mapper.Map<Department>(departmentDTO);
+            var newDepartment = mapper.Map<Department>(department);
             dataContext.Departments.Add(newDepartment);
             var save = dataContext.SaveChanges();
             return save;
         }
 
-        public int Update(DepartmentDTO departmentDTO)
+        public int Update(DepartmentEntrieDTO department)
         {
-            var newDepartment = dataContext.Departments.Find(departmentDTO.Id);
-            newDepartment.Name = departmentDTO.Name;
-            newDepartment.LocationId = departmentDTO.LocationId;
+            var newDepartment = dataContext.Departments.Find(department.Id);
+            newDepartment.Name = department.Name;
+            newDepartment.LocationId = department.LocationId;
             var save = dataContext.SaveChanges();
             return save;
         }

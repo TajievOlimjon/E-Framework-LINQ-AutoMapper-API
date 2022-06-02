@@ -2,6 +2,7 @@
 using Services.InterfaceService;
 using Services.ClassServices;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 
 namespace WebApIPersistenseProgect.Controllers
 {
@@ -17,24 +18,24 @@ namespace WebApIPersistenseProgect.Controllers
         }
 
         [HttpGet("GetLocations")]
-        public List<LocationDTO> GetLocations()
+        public List<LocationEntrieDTO> GetLocations()
         {
             return locationService.GetLocations();
         }
         [HttpGet("GetLocation")]
-        public List<LocationDTO> GetLocation(int id)
+        public List<LocationEntrieDTO> GetLocation(int id)
         {
             return locationService.GetLocation(id);
         }
         [HttpPost("Insert")]
-        public int Insert(LocationDTO locationDTO)
+        public int Insert(LocationEntrieDTO location)
         {
-            return locationService.Insert(locationDTO);
+            return locationService.Insert(location);
         }
         [HttpPut("Update")]
-        public int Update(LocationDTO locationDTO)
+        public int Update(LocationEntrieDTO location)
         {
-            return locationService.Update(locationDTO);
+            return locationService.Update(location);
         }
         [HttpDelete("Delete")]
         public int Delete(int Id)

@@ -2,6 +2,7 @@
 using Services.InterfaceService;
 using Services.ClassServices;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 
 namespace WebApIPersistenseProgect.Controllers
 {
@@ -17,22 +18,22 @@ namespace WebApIPersistenseProgect.Controllers
         }
 
         [HttpGet("GetCountries")]
-       public  List<CountrieDTO> GetCountries()
+       public  List<CountrieEntrieDTO> GetCountries()
         {
             return countrieService.GetCountries();
         }
         [HttpGet("GetCountrie")]
-        public List<CountrieDTO> GetCountrie(int id)
+        public List<CountrieEntrieDTO> GetCountrie(int id)
         {
             return countrieService.GetCountrie(id);
         }
         [HttpPost("Insert")]
-        public int Insert(CountrieDTO countrie)
+        public int Insert(CountrieEntrieDTO countrie)
         {
             return countrieService.Insert(countrie);
         }
         [HttpPut("Update")]
-        public int Update(CountrieDTO countrie)
+        public int Update(CountrieEntrieDTO countrie)
         {
             return countrieService.Update(countrie);
         }

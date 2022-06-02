@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -29,10 +30,10 @@ namespace Services.ClassServices
             return save;
         }
 
-        public List<CountrieDTO> GetCountrie(int id)
+        public List<CountrieEntrieDTO> GetCountrie(int id)
         {
             var list=(from c in dataContext.Countries
-                      select new CountrieDTO()
+                      select new CountrieEntrieDTO()
                       {
                           Id = id,
                           Name = c.Name,
@@ -41,11 +42,11 @@ namespace Services.ClassServices
             return list;
         }
 
-        public List<CountrieDTO> GetCountries()
+        public List<CountrieEntrieDTO> GetCountries()
         {
             var list = (
                         from c in dataContext.Countries
-                        select new CountrieDTO
+                        select new CountrieEntrieDTO
                         {
                             Id = c.Id,
                             Name=c.Name,
@@ -57,7 +58,7 @@ namespace Services.ClassServices
             return list;
         }
 
-        public int Insert(CountrieDTO countrie)
+        public int Insert(CountrieEntrieDTO countrie)
         {
             var newCountrie = mapper.Map<Countrie>(countrie);
             dataContext.Countries.Add(newCountrie);
@@ -65,7 +66,7 @@ namespace Services.ClassServices
             return save;
         }
 
-        public int Update(CountrieDTO countrie)
+        public int Update(CountrieEntrieDTO countrie)
         {
             var newcountrie = dataContext.Countries.Find(countrie.Id);
             newcountrie.Name = countrie.Name;

@@ -2,6 +2,7 @@
 using Services.InterfaceService;
 using Services.ClassServices;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 
 namespace WebApIPersistenseProgect.Controllers
 {
@@ -29,28 +30,33 @@ namespace WebApIPersistenseProgect.Controllers
         }
 
         [HttpGet("GetEmployees")]
-        public List<EmployeeDT> GetEmployees()
+        public List<EmployeeEntrieDTO> GetEmployees()
         {
             return employeeService.GetEmployees();
         }
 
         [HttpGet("GetEmployee")]
-        public List<EmployeeDT> GetEmployee(int id)
+        public List<EmployeeEntrieDTO> GetEmployee(int id)
         {
             return employeeService.GetEmployee(id);
         }
 
+        [HttpGet("GetAllFullNames")]
+        public List<EmployeeEntrieDTO> GetAllFullNames()
+        {
+            return employeeService.GetAllFullNames();
+        }
 
         [HttpPost("Insert")]
-        public string Insert(EmployeeDT employeedt)
+        public string Insert(EmployeeEntrieDTO employee)
         {
-            return employeeService.Insert(employeedt);
+            return employeeService.Insert(employee);
         }
 
         [HttpPut("Update")]
-        public string Update(EmployeeDT employeedt)
+        public string Update(EmployeeEntrieDTO employee)
         {
-            return employeeService.Update(employeedt);
+            return employeeService.Update(employee);
         }
 
         [HttpDelete("Delete")]

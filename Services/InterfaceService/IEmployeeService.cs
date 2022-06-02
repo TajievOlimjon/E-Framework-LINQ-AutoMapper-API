@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,11 +11,13 @@ namespace Services.InterfaceService
     public  interface IEmployeeService
     {   
         List<Employee> GetEmployeesInList();
-        List<EmployeeDT> GetEmployees();
+        List<EmployeeEntrieDTO> GetEmployees();
         List<EmployeeDTO> GetEmployeeByJoin();
-        List<EmployeeDT> GetEmployee(int id);
-        string  Insert(EmployeeDT employeedt);
-        string  Update(EmployeeDT employeedt);
+        List<EmployeeEntrieDTO> GetEmployee(int id);
+        string  Insert(EmployeeEntrieDTO employee);
+        string  Update(EmployeeEntrieDTO employee);
         string  Delete(int id);
+
+         List<EmployeeEntrieDTO> GetAllFullNames();
     }
 }

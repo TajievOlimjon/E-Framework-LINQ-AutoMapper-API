@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 using Microsoft.AspNetCore.Mvc;
 using Services.InterfaceService;
 
@@ -15,31 +16,33 @@ namespace WebApIPersistenseProgect.Controllers
             this.departmentService = departmentService;
         }
 
-        [HttpGet("GetDepartments")]
-        public List<DepartmentDTO> GetDepartments()
-        {
-            return departmentService.GetDepartments();
-        }
         [HttpGet("GetDepartmentsAndEmployees")]
-        public List<DepartmentEL> GetDepartmentsAndEmployees()
+        public List<DepartmentDTO> GetDepartmentsAndEmployees()
         {
             return departmentService.GetDepartmentsAndEmployees();
         }
-        [HttpGet("GetDepartment")]
-        public List<DepartmentDTO> GetDepartment(int id)
+
+        [HttpGet("GetDepartments")]
+        public List<DepartmentEntrieDTO> GetDepartments()
         {
-            return departmentService.GetDepartment(id);
+            return departmentService.GetDepartments();
+        }
+       
+        [HttpGet("GetDepartment")]
+        public List<DepartmentEntrieDTO> GetDepartment(int id)
+        {
+            return departmentService.GetDepartments(id);
         }
         
         [HttpPost("Insert")]
-        public int Insert(DepartmentDTO departmentDTO)
+        public int Insert(DepartmentEntrieDTO department)
         {
-            return departmentService.Insert(departmentDTO);
+            return departmentService.Insert(department);
         }
         [HttpPut("Update")]
-        public int Update(DepartmentDTO departmentDTO)
+        public int Update(DepartmentEntrieDTO department)
         {
-            return departmentService.Update(departmentDTO);
+            return departmentService.Update(department);
         }
         [HttpDelete("Delete")]
         public int Delete(int id)

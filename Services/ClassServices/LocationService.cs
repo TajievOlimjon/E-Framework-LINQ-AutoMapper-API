@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -30,10 +31,11 @@ namespace Services.ClassServices
 
         }
 
-        public List<LocationDTO> GetLocation(int id)
+        public List<LocationEntrieDTO> GetLocation(int id)
         {
             var list = (from l in dataContext.Locations
-                        select new LocationDTO()
+                        where l.Id==id
+                        select new LocationEntrieDTO()
                         { Id=l.Id,
                           StreetAddress=l.StreetAddress,        
                           PostalCode=l.PostalCode,
@@ -45,12 +47,12 @@ namespace Services.ClassServices
             return list;
         }
 
-        public List<LocationDTO> GetLocations()
+        public List<LocationEntrieDTO> GetLocations()
         {
             var list=(
                 from l in dataContext.Locations
                 join c in dataContext.Countries on l.CountrieId equals c.Id
-                select new LocationDTO()
+                select new LocationEntrieDTO()
                 {
                     Id = l.Id,
                     StreetAddress=l.StreetAddress,
@@ -64,22 +66,22 @@ namespace Services.ClassServices
             return list;
         }
 
-        public int Insert(LocationDTO locationDTO)
+        public int Insert(LocationEntrieDTO location)
         {
-            var location = mapper.Map<Location>(locationDTO);
-            dataContext.Locations.Add(location);
+            var Newlocation = mapper.Map<Location>(location);
+            dataContext.Locations.Add(Newlocation);
             var save = dataContext.SaveChanges();
             return save;
         }
 
-        public int Update(LocationDTO locationDTO)
+        public int Update(LocationEntrieDTO location)
         {
-            var newLocation = dataContext.Locations.Find(locationDTO.Id);
-            newLocation.StreetAddress = locationDTO.StreetAddress;
-            newLocation.PostalCode = locationDTO.PostalCode;
-            newLocation.City = locationDTO.City;
-            newLocation.StateProvince = locationDTO.StateProvince;
-            newLocation.CountrieId = locationDTO.CountrieId;
+            var newLocation = dataContext.Locations.Find(location.Id);
+            newLocation.StreetAddress = location.StreetAddress;
+            newLocation.PostalCode = location.PostalCode;
+            newLocation.City = location.City;
+            newLocation.StateProvince = location.StateProvince;
+            newLocation.CountrieId = location.CountrieId;
 
             var save = dataContext.SaveChanges();
             return save;

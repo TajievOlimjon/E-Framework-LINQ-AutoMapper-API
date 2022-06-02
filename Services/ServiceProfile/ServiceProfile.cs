@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Domain.Entities;
+using Domain.EntitiesDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,11 @@ namespace Services.ServiceProfile
     {
         public ServiceProfile()
         {
-            CreateMap<EmployeeDT, Employee>();
-            CreateMap<DepartmentDTO, Department>();
-            CreateMap<LocationDTO,Location>();
-            CreateMap<CountrieDTO,Countrie>();
+            CreateMap<EmployeeEntrieDTO, Employee>();
+            CreateMap<DepartmentEntrieDTO, Department>();
+            CreateMap<LocationEntrieDTO,Location>();
+            CreateMap<CountrieEntrieDTO,Countrie>();
+            
 
         }
     }

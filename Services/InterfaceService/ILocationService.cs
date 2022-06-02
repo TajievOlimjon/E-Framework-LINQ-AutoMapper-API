@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Domain.EntitiesDTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Services.InterfaceService
 {
     public  interface ILocationService
     {
-        List<LocationDTO> GetLocations();
-        List<LocationDTO> GetLocation(int id);
-        int Insert(LocationDTO locationDTO);
-        int Update(LocationDTO locationDTO);
+        List<LocationEntrieDTO> GetLocations();
+        List<LocationEntrieDTO> GetLocation(int id);
+        int Insert(LocationEntrieDTO locationDTO);
+        int Update(LocationEntrieDTO locationDTO);
         int Delete(int Id);
     }
 }
