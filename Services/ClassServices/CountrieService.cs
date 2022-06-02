@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -12,10 +13,12 @@ namespace Services.ClassServices
     public class CountrieService: ICountrieService 
     {
         private readonly DataContext dataContext;
+        private readonly IMapper mapper;
 
-        public CountrieService(DataContext dataContext)
+        public CountrieService(DataContext dataContext,IMapper mapper)
         {
             this.dataContext = dataContext;
+            this.mapper = mapper;
         }
 
         public int Delete(int id)
@@ -56,14 +59,8 @@ namespace Services.ClassServices
 
         public int Insert(CountrieDTO countrie)
         {
-            Countrie newcountrie = new Countrie()
-            {
-                
-                Name = countrie.Name,
-                RegionId = countrie.RegionId
-
-            };
-            dataContext.Countries.Add(newcountrie);
+            var newCountrie = mapper.Map<Countrie>(countrie);
+            dataContext.Countries.Add(newCountrie);
             var save = dataContext.SaveChanges();
             return save;
         }

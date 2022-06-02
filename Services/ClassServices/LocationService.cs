@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -12,10 +13,12 @@ namespace Services.ClassServices
     public  class LocationService:ILocationService
     {
         private readonly DataContext dataContext;
+        private readonly IMapper mapper;
 
-        public LocationService(DataContext dataContext)
+        public LocationService(DataContext dataContext,IMapper mapper)
         {
             this.dataContext = dataContext;
+            this.mapper = mapper;
         }
 
         public int Delete(int Id)
@@ -63,16 +66,7 @@ namespace Services.ClassServices
 
         public int Insert(LocationDTO locationDTO)
         {
-            Location location = new Location()
-            {
-                StreetAddress = locationDTO.StreetAddress,
-                PostalCode = locationDTO.PostalCode,
-                City = locationDTO.City,
-                StateProvince = locationDTO.StateProvince,
-                CountrieId = locationDTO.CountrieId
-            };
-            
-            
+            var location = mapper.Map<Location>(locationDTO);
             dataContext.Locations.Add(location);
             var save = dataContext.SaveChanges();
             return save;
