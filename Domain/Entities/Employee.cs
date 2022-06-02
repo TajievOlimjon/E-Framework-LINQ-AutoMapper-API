@@ -28,7 +28,7 @@ namespace Domain.Entities
         public string? Email { get; set; }
         
         [Column("Phone_Number")]
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
        
         [Column("Hire_Date")]
         public DateTime HireDate { get; set; }
@@ -51,7 +51,7 @@ namespace Domain.Entities
         public int EmployeeId { get; set; }
         public string? FullName { get; set; }
         public string? Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         public DateTime HireDate { get; set; }
         public decimal Salary { get; set; }
         public int DepartmentId { get; set; }
@@ -67,7 +67,7 @@ namespace Domain.Entities
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public string? Email { get; set; }
-        public int PhoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         public DateTime HireDate { get; set; }
         public decimal Salary { get; set; }
         public int JobId { get; set; }

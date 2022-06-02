@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 
 using Persistence.Data;
 using Services.InterfaceService;
@@ -13,10 +14,12 @@ namespace Services.ClassServices
     public  class EmployeeService:IEmployeeService
     {
         private readonly DataContext dataContext;
-
-        public EmployeeService(DataContext dataContext)
+        private IMapper mapper;
+        public EmployeeService(DataContext dataContext, IMapper mapper)
         {
             this.dataContext = dataContext;
+            this.mapper = mapper;
+
         }
 
 
@@ -62,19 +65,8 @@ namespace Services.ClassServices
 
         public string Insert(EmployeeDT employeedt)
         {
-            Employee employee = new Employee()
-            {
-                FirstName = employeedt.FirstName,
-                LastName = employeedt.LastName,
-                Email = employeedt.Email,
-                PhoneNumber = employeedt.PhoneNumber,
-                HireDate = employeedt.HireDate,
-                Salary = employeedt.Salary,
-                JobId = employeedt.JobId,
-                DepartmentId = employeedt.DepartmentId
-
-            };
-            dataContext.Employees.Add(employee);
+            var newEmployee = mapper.Map<Employee>(employeedt);
+            dataContext.Employees.Add(newEmployee);
             var save = dataContext.SaveChanges();
             if (!save.Equals(null)) return " Saved in Database!!!!";
             return " Not Saved in DataBase!";

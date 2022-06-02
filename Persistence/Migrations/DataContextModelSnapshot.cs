@@ -148,8 +148,8 @@ namespace Persistence.Migrations
                         .HasColumnType("character varying(25)")
                         .HasColumnName("Last_Name");
 
-                    b.Property<int>("PhoneNumber")
-                        .HasColumnType("integer")
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("text")
                         .HasColumnName("Phone_Number");
 
                     b.Property<decimal>("Salary")

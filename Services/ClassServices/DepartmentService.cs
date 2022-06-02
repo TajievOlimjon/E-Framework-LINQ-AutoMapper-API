@@ -1,4 +1,5 @@
-﻿using Domain.Entities;
+﻿using AutoMapper;
+using Domain.Entities;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -12,10 +13,12 @@ namespace Services.ClassServices
     public  class DepartmentService:IDepartmentService
     {
         private readonly DataContext dataContext;
+        private readonly IMapper mapper;
 
-        public DepartmentService(DataContext dataContext)
+        public DepartmentService(DataContext dataContext,IMapper mapper)
         {
             this.dataContext = dataContext;
+            this.mapper = mapper;
         }
 
         
@@ -83,12 +86,8 @@ namespace Services.ClassServices
 
         public int Insert(DepartmentDTO departmentDTO)
         {
-            Department department = new Department()
-            {
-                Name = departmentDTO.Name,
-                LocationId=departmentDTO.LocationId
-            };
-            dataContext.Departments.Add(department);
+            var newDepartment = mapper.Map<Department>(departmentDTO);
+            dataContext.Departments.Add(newDepartment);
             var save = dataContext.SaveChanges();
             return save;
         }

@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Services.ClassServices;
 using Services.InterfaceService;
+using Services.ServiceProfile;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +16,12 @@ builder.Services.AddScoped<IJobService,JobService>();
 // get connection string from appsettings.json
 string connection = builder.Configuration.GetConnectionString("DefaultConnection");
 
+
 // Add DataContext in DI injection
 builder.Services.AddDbContext<DataContext>(options => options.UseNpgsql(connection));
 
+
+builder.Services.AddAutoMapper(typeof(ServiceProfile));
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
