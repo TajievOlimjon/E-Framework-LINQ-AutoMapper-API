@@ -1,4 +1,5 @@
 ﻿using Domain.Entities;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -21,14 +22,22 @@ namespace Services.ClassServices
         public int Delete(int Id)
         {
             var delete = dataContext.Regions.Find(Id);
-            var d=dataContext.Regions.Remove(delete);
+            if (delete == null) return 0;
+            dataContext.Regions.Remove(delete);
             var save = dataContext.SaveChanges();
             return save;
+
+            //var d=dataContext.Regions.First(r=>r.Id==Id);
+            //dataContext.Entry(d).State = EntityState.Deleted;
+            //return dataContext.SaveChanges();
+
         }
 
         public Region GetRegionById(int Id)
         {
-            var d = dataContext.Regions.Find(Id);
+             var d = dataContext.Regions.FirstOrDefault(p => p.Id == Id);
+            //var d = dataContext.Regions.SingleOrDefault(r => r.Id == Id);
+            if (d == null) return new Region();
             return d;
         }
 
@@ -40,6 +49,8 @@ namespace Services.ClassServices
 
         public int Insert(Region region)
         {
+            //dataContext.Entry(region).State = EntityState.Added;
+            //return dataContext.SaveChanges();
             dataContext.Regions.Add(region);
             var save = dataContext.SaveChanges();
             return save;
@@ -48,9 +59,16 @@ namespace Services.ClassServices
         public int Update(Region region)
         {
             var newRegion = dataContext.Regions.Find(region.Id);
+            if (newRegion == null) return 0;
             newRegion.RegionName = region.RegionName;
-            var save = dataContext.SaveChanges();
-            return save;
+            return dataContext.SaveChanges();
+            
+
+
+
+            //dataContext.Regions.Attach(region);
+            //dataContext.Entry(region).State = EntityState.Modified;
+            //return dataContext.SaveChanges();
         }
     }
 }

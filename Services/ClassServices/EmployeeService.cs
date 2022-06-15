@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Domain.Entities;
 using Domain.EntitiesDTO;
+using Microsoft.EntityFrameworkCore;
 using Persistence.Data;
 using Services.InterfaceService;
 using System;
@@ -44,6 +45,7 @@ namespace Services.ClassServices
             return list;
         }
 
+       
         public List<EmployeeEntrieDTO> GetEmployees()
         {
             var list = (
@@ -76,7 +78,8 @@ namespace Services.ClassServices
 
         public string Update(EmployeeEntrieDTO employee)
         {
-            var newEmployee = dataContext.Employees.Find(employee.Id);
+            var newEmployee = dataContext.Employees.FirstOrDefault(e=>e.Id==employee.Id);
+            if (newEmployee == null) return 0.ToString();
             newEmployee.FirstName = employee.FirstName;
             newEmployee.LastName = employee.LastName;
             newEmployee.Email = employee.Email;
@@ -94,7 +97,8 @@ namespace Services.ClassServices
         public string Delete(int id)
         {
             var employee = dataContext.Employees.Find(id);
-            var d = dataContext.Employees.Remove(employee);
+            if(employee == null) return 0.ToString();   
+            dataContext.Employees.Remove(employee);
             var save = dataContext.SaveChanges();
             if (!employee.Equals(null)) return " Deleted in Database!!!!";
             return " Not Deleted in DataBase!";

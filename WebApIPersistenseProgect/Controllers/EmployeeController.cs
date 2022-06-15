@@ -23,6 +23,12 @@ namespace WebApIPersistenseProgect.Controllers
             return employeeService.GetEmployeesInList();
         }
 
+        [HttpGet("GetEmpDep")]
+        public List<Employee> GetEmpDep()
+        {
+            return employeeService.GetEmpDep();
+        }
+
         [HttpGet("GetEmployeeByJoin")]
         public List<EmployeeDTO> GetEmployeeByJoin()
         {
